@@ -1,0 +1,18 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v3.2.202087883)
+
+# 8 vertex positions
+v  0.5  0.5  0.5
+v  0.5  0.5 -0.5
+v  0.5 -0.5 -0.5
+v  0.5 -0.5  0.5
+v -0.5  0.5  0.5
+v -0.5  0.5 -0.5
+v -0.5 -0.5 -0.5
+v -0.5 -0.5  0.5
+
+
+# Mesh 'mesh1_mesh1-geometry' with 1024 faces
+g mesh1_mesh1-geometry
+f  1 8 4
+f  1 5 8
