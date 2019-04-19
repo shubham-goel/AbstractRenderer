@@ -191,21 +191,21 @@ def transformND(X, M, first_axis=False):
     # Numpy and Torch friendly
     if first_axis:  # X: (3, ...)
         assert(X.shape[0] in [3,4])
-        return homo2eucl(M @ eucl2homo(X, first_axis=True), first_axis=True)
+        return homo2eucl(M.dot(eucl2homo(X, first_axis=True)), first_axis=True)
     else:           # X: (... , 3)
         assert(X.shape[-1] in [3,4])
         Mt = M.t() if torch.is_tensor(M) else M.T
-        return homo2eucl(eucl2homo(X, first_axis=False) @ Mt, first_axis=False)
+        return homo2eucl(eucl2homo(X, first_axis=False).dot(Mt), first_axis=False)
 
 def projectND(X, P, first_axis=False):
     # Numpy and Torch friendly
     if first_axis:  # X: (3, ...)
         assert(X.shape[0] in [3,4])
-        return homo2eucl(P @ X, first_axis=True)
+        return homo2eucl(P.dot(X), first_axis=True)
     else:           # X: (... , 3)
         assert(X.shape[-1] in [3,4])
         Pt = P.t() if torch.is_tensor(P) else P.T
-        return homo2eucl(X @ Pt, first_axis=False)
+        return homo2eucl(X.dot(Pt), first_axis=False)
 
 # Checks if a matrix is a valid rotation matrix.
 def isRotationMatrix(R, atol=1e-4) :
@@ -246,7 +246,7 @@ def eulerAnglesToRotationMatrix(theta) :
     R_x = eulerXToRotationMatrix(theta[0])
     R_y = eulerYToRotationMatrix(theta[1])
     R_z = eulerZToRotationMatrix(theta[2])
-    return R_z @ R_y @ R_x
+    return R_z.dot(R_y.dot(R_x))
 def axisAngleToRotationMatrix(axis, theta):
     """
     Return the rotation matrix associated with counterclockwise rotation about
