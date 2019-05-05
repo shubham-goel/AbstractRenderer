@@ -166,10 +166,11 @@ def render_scene_abstract(vertices, faces, img_h, img_w, R, t):
 
 if __name__ == "__main__":
     # scene_file = '3dmodels/guitar/models/model_normalized.obj'
-    scene_file = '3dmodels/rectangle.obj'
+    # scene_file = '3dmodels/rectangle.obj'
+    scene_file = '3dmodels/tetrahedron.obj'
     # scene_file = '3dmodels/triangle.obj'
     scene = trimesh.load(scene_file)
-    # scene.show()
+    scene.show()
 
     vertices = scene.vertices
     faces = scene.faces
@@ -191,7 +192,9 @@ if __name__ == "__main__":
         image_concrete = render_scene_concrete(vertices, faces, img_h, img_w, R, t)
         R = np.vectorize(Box)(R)
         t = np.vectorize(Box)(t)
-        t = t + Box(0,0.01)
+        delta_t = Box(0,0.01)
+        t = t + delta_t
+        print(f'delta_t: {delta_t}')
 
         image = render_scene_abstract(vertices, faces, img_h, img_w, R, t)
 
